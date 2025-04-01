@@ -30,6 +30,29 @@ body {
     align-items: center;
 }
 
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.goodMessage {
+    background-color: green;
+    color: var(--text-color);
+    width: 250px;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.badMessage {
+    background-color: red;
+    color: var(--text-color);
+    width: 250px;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
 #passwordInput{
     font-size: 2rem;
     border-radius: 25px;
@@ -41,8 +64,13 @@ body {
 }
 
 #passwordButton{
+    position: relative;
+    top: 0px;
+    left: -55px;
     border-radius: 25px;
     background-color: var(--primary-color);
     color: var(--text-color);
-    height: 50px;
+    height: 51px;
+    width: 50px;
+    font-size: 2rem;
 }

@@ -14,41 +14,52 @@ async function checkPassword() {
 
     if(checkPasswordLength(password)){
         lengthMessage.textContent = "Password length is good!";
+        lengthMessage.className = "goodMessage";
     } else {
         let passlength = password.length;
         lengthMessage.textContent = `Passowrd length is too short, it is ${passlength} character(s) long`;
+        lengthMessage.className = "badMessage";
         return;
     }
 
     if(checkPasswordCapital(password)){
         capitalMessage.textContent = "Password has a capital letter!";
+        capitalMessage.className = "goodMessage";
     } else {
         capitalMessage.textContent = "Password does not have a capital letter!";
+        capitalMessage.className = "badMessage";
         return;
     }
 
     if(checkPasswordNum(password)){
         numMessage.textContent = "Password has a number!";
+        numMessage.className = "goodMessage";
     } else {
         numMessage.textContent = "Password does not have a number!";
+        numMessage.className = "badMessage";
         return;
     }
 
     if(checkPasswordSpecial(password)){
         specialMessage.textContent = "Password has a special character!";
+        specialMessage.className = "goodMessage";
     } else {
         specialMessage.textContent = "Password does not have a special character!";
+        specialMessage.className = "badMessage";
         return;
     }
 
     if(isPwned){
         pwnedMessage.textContent = "Password has been found in any known breaches!";
+        pwnedMessage.className = "badMessage";
         return;
     } else {
         pwnedMessage.textContent = "Password has not been found in any known breaches!";
+        pwnedMessage.className = "goodMessage";
     }
 
     finalMessage.textContent = "Password is strong!";
+    finalMessage.className = "goodMessage";
 
 }
 
