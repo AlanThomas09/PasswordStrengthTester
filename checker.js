@@ -17,7 +17,7 @@ async function checkPassword() {
         lengthMessage.className = "goodMessage";
     } else {
         let passlength = password.length;
-        lengthMessage.textContent = `Passowrd length is too short, it is ${passlength} character(s) long`;
+        lengthMessage.textContent = `Password length is too short, it is ${passlength} character(s) long`;
         lengthMessage.className = "badMessage";
         return;
     }
@@ -86,6 +86,13 @@ function clearMessages() {
     specialMessage.textContent = "";
     pwnedMessage.textContent = "";
     finalMessage.textContent = "";
+
+    lengthMessage.className = "";
+    capitalMessage.className = "";
+    numMessage.className = "";
+    specialMessage.className = "";
+    pwnedMessage.className = "";
+    finalMessage.className = "";
 }
 
 async function checkPasswordPwned(password) {
