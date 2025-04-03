@@ -41,7 +41,7 @@ async function checkPassword() {
     }
 
     if(isPwned){
-        setMessage(pwnedMessage, "Password has been found in any known breaches!", "badMessage");
+        setMessage(pwnedMessage, "Password has been found in known breaches!", "badMessage");
         return;
     } else {
         setMessage(pwnedMessage, "Password has not been found in any known breaches!", "goodMessage");
