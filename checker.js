@@ -1,4 +1,3 @@
-
 async function checkPassword() {
     let password = document.getElementById("passwordInput").value;
     let lengthMessage = document.getElementById("lengthMessage");
@@ -13,54 +12,42 @@ async function checkPassword() {
     clearMessages();
 
     if(checkPasswordLength(password)){
-        lengthMessage.textContent = "Password length is good!";
-        lengthMessage.className = "goodMessage";
+        setMessage(lengthMessage, "Password length is good!", "goodMessage");
     } else {
         let passlength = password.length;
-        lengthMessage.textContent = `Password length is too short, it is ${passlength} character(s) long`;
-        lengthMessage.className = "badMessage";
+        setMessage(lengthMessage, `Password length is too short, it is ${passlength} character(s) long`, "badMessage");
         return;
     }
 
     if(checkPasswordCapital(password)){
-        capitalMessage.textContent = "Password has a capital letter!";
-        capitalMessage.className = "goodMessage";
+        setMessage(capitalMessage, "Password has a capital letter!", "goodMessage");
     } else {
-        capitalMessage.textContent = "Password does not have a capital letter!";
-        capitalMessage.className = "badMessage";
+        setMessage(capitalMessage, "Password does not have a capital letter!", "badMessage");
         return;
     }
 
     if(checkPasswordNum(password)){
-        numMessage.textContent = "Password has a number!";
-        numMessage.className = "goodMessage";
+        setMessage(numMessage, "Password has a number!", "goodMessage");
     } else {
-        numMessage.textContent = "Password does not have a number!";
-        numMessage.className = "badMessage";
+        setMessage(numMessage, "Password does not have a number!", "badMessage");
         return;
     }
 
     if(checkPasswordSpecial(password)){
-        specialMessage.textContent = "Password has a special character!";
-        specialMessage.className = "goodMessage";
+        setMessage(specialMessage, "Password has a special character!", "goodMessage");
     } else {
-        specialMessage.textContent = "Password does not have a special character!";
-        specialMessage.className = "badMessage";
+        setMessage(specialMessage, "Password does not have a special character!", "badMessage");
         return;
     }
 
     if(isPwned){
-        pwnedMessage.textContent = "Password has been found in any known breaches!";
-        pwnedMessage.className = "badMessage";
+        setMessage(pwnedMessage, "Password has been found in any known breaches!", "badMessage");
         return;
     } else {
-        pwnedMessage.textContent = "Password has not been found in any known breaches!";
-        pwnedMessage.className = "goodMessage";
+        setMessage(pwnedMessage, "Password has not been found in any known breaches!", "goodMessage");
     }
 
-    finalMessage.textContent = "Password is strong!";
-    finalMessage.className = "goodMessage";
-
+    setMessage(finalMessage, "Password is strong!", "goodMessage");
 }
 
 function checkPasswordLength(password) {
@@ -79,20 +66,25 @@ function checkPasswordSpecial(password) {
     return password.match(/[!@#$%^&*?]/);
 }
 
-function clearMessages() {
-    lengthMessage.textContent = "";
-    capitalMessage.textContent = "";
-    numMessage.textContent = "";
-    specialMessage.textContent = "";
-    pwnedMessage.textContent = "";
-    finalMessage.textContent = "";
+function setMessage(element, text, className) {
+    element.style.animation = 'none';
+    element.offsetHeight;
+    element.style.animation = null;
+    element.textContent = text;
+    element.className = className;
+}
 
-    lengthMessage.className = "";
-    capitalMessage.className = "";
-    numMessage.className = "";
-    specialMessage.className = "";
-    pwnedMessage.className = "";
-    finalMessage.className = "";
+function clearMessages() {
+    const messages = [
+        lengthMessage, capitalMessage, numMessage, 
+        specialMessage, pwnedMessage, finalMessage
+    ];
+    
+    messages.forEach(msg => {
+        msg.textContent = "";
+        msg.className = "";
+        msg.style.animation = 'none';
+    });
 }
 
 async function checkPasswordPwned(password) {
@@ -114,7 +106,6 @@ async function checkPasswordPwned(password) {
     return found;
 }
 
-
 async function sha1(str) {
     const buffer = new TextEncoder().encode(str);
     const hashBuffer = await crypto.subtle.digest("SHA-1", buffer);
@@ -122,5 +113,3 @@ async function sha1(str) {
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     return hashHex;
 }
-
-

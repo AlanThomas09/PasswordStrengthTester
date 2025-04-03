@@ -4,29 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <title>Password Strength Tester</title>
 </head>
 <body>
-    <div id="title-container">
-        <script src="checker.js"></script>
-        <header id="header">
-            <h1>Password Strength Tester</h1>
-            <h2>Enter a password to check if it is strong</h2>
-        </header>
+    <canvas id="matrix"></canvas>
+    <div class="content-wrapper">
+        <div id="title-container">
+            <header id="header">
+                <h1>Password Strength Tester</h1>
+                <h2>Enter a password to check if it is strong</h2>
+            </header>
+        </div>
+        <div id="password-container">
+            <form id="passwordForm" onsubmit="event.preventDefault(); checkPassword();">
+                <input type="password" id="passwordInput" placeholder="_">
+                <button type="submit" id="passwordButton">✔</button>
+            </form>
+        </div>
+        <div id="message-container">
+            <p id="lengthMessage"></p>
+            <p id="capitalMessage"></p>
+            <p id="numMessage"></p>
+            <p id="specialMessage"></p>
+            <p id="pwnedMessage"></p>
+            <p id="finalMessage"></p>
+        </div>
     </div>
-    <div id="password-container">
-        <form id="passwordForm" onsubmit="event.preventDefault(); checkPassword();">
-            <input type="password" id="passwordInput">
-            <button type="submit" id="passwordButton">✔</button>
-        </form>
-    </div>
-    <div id="message-container">
-        <p id="lengthMessage"></p>
-        <p id="capitalMessage"></p>
-        <p id="numMessage"></p>
-        <p id="specialMessage"></p>
-        <p id="pwnedMessage"></p>
-        <p id="finalMessage"></p>
-    </div>
+    <script src="checker.js"></script>
+    <script src="matrix.js"></script>
 </body>
 </html>

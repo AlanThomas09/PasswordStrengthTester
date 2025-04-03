@@ -1,84 +1,147 @@
 :root {
-    --primary-color: rgba(0,0,0,1);
-    --secondary-color: rgba(0,4,37,1);
-    --text-color: #ffffff;
+    --matrix-green: #00ff00;
+    --matrix-dark: #001100;
+    --text-color: var(--matrix-green);
+    --glow-color: rgba(0, 255, 0, 0.5);
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Share Tech Mono', monospace;
 }
 
 body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,4,37,1) 100%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: 'Poppins', sans-serif;
+    background: black;
     color: var(--text-color);
     text-align: center;
+    overflow: hidden;
 }
 
-.title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
-.password-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.message-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+.content-wrapper {
+    position: relative;
+    z-index: 2;
     padding: 20px;
-    min-height: 300px;
+    background: rgba(0, 0, 0, 0.7);
+    min-height: 100vh;
 }
 
-.goodMessage, .badMessage {
-    display: block;
-    margin: 10px auto;
-    width: 250px;
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px var(--glow-color);
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+#password-container {
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+#passwordForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#passwordInput {
+    width: 80%;
+    max-width: 500px;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    background: var(--matrix-dark);
+    border: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 0 10px var(--glow-color);
+    caret-shape: underline;
+    caret-color: var(--matrix-green);
+}
+
+#passwordInput:focus {
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+#passwordButton {
+    font-size: 1.5rem;
     padding: 10px 20px;
-    border-radius: 25px;
-    text-align: center;
+    background: var(--matrix-dark);
+    border: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#passwordButton:hover {
+    background: var(--matrix-green);
+    color: black;
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+#message-container {
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+#message-container p {
+    margin: 0.5rem 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
 }
 
 .goodMessage {
-    background-color: green;
-    color: var(--text-color);
+    border-color: var(--matrix-green) !important;
+    box-shadow: 0 0 10px var(--glow-color);
+    background: var(--matrix-dark);
+    border: 1px solid var(--matrix-green);
 }
 
 .badMessage {
-    background-color: red;
-    color: var(--text-color);
+    background: var(--matrix-dark);
+    border: 1px solid var(--matrix-green);
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
-#passwordInput{
-    font-size: 2rem;
-    border-radius: 25px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    border-style: ridge;
-    color: var(--text-color);
-    width: 500px;
-    height: 30px;
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px var(--glow-color);
+    }
+    to {
+        text-shadow: 0 0 20px var(--glow-color);
+    }
 }
 
-#passwordButton{
-    position: relative;
-    top: 0.5px;
-    left: -55px;
-    border-radius: 25px;
-    border-style: ridge;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    height: 54px;
-    width: 50px;
-    font-size: 2rem;
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
