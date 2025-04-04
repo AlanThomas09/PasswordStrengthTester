@@ -11,43 +11,43 @@ async function checkPassword() {
 
     clearMessages();
 
-    if(checkPasswordLength(password)){
-        setMessage(lengthMessage, "Password length is good!", "goodMessage");
-    } else {
-        let passlength = password.length;
-        setMessage(lengthMessage, `Password length is too short, it is ${passlength} character(s) long`, "badMessage");
+    let strongPassword = checkPasswordLength(password) && checkPasswordCapital(password) && checkPasswordNum(password) && checkPasswordSpecial(password) && !isPwned;
+    if(strongPassword) {
+        setMessage(finalMessage, "Password is strong!", "goodMessage");
         return;
+    } else {
+        setMessage(finalMessage, "Password is not strong!", "badMessage");
+    }
+
+    if(checkPasswordLength(password)){
+        setMessage(lengthMessage, "Password Length is good!", "goodMessage");
+    } else {
+        setMessage(lengthMessage, `Password Length is ${password.length} characters long. Recommended length is 12 characters or more.`, "badMessage");
     }
 
     if(checkPasswordCapital(password)){
-        setMessage(capitalMessage, "Password has a capital letter!", "goodMessage");
+        setMessage(capitalMessage, "Password contains a capital letter!", "goodMessage");
     } else {
-        setMessage(capitalMessage, "Password does not have a capital letter!", "badMessage");
-        return;
+        setMessage(capitalMessage, "Password does not contain a capital letter!", "badMessage");
     }
 
     if(checkPasswordNum(password)){
-        setMessage(numMessage, "Password has a number!", "goodMessage");
+        setMessage(numMessage, "Password contains a number!", "goodMessage");
     } else {
-        setMessage(numMessage, "Password does not have a number!", "badMessage");
-        return;
+        setMessage(numMessage, "Password does not contain a number!", "badMessage");
     }
 
     if(checkPasswordSpecial(password)){
-        setMessage(specialMessage, "Password has a special character!", "goodMessage");
+        setMessage(specialMessage, "Password contains a special character!", "goodMessage");
     } else {
-        setMessage(specialMessage, "Password does not have a special character!", "badMessage");
-        return;
+        setMessage(specialMessage, "Password does not contain a special character!", "badMessage");
     }
 
     if(isPwned){
-        setMessage(pwnedMessage, "Password has been found in known breaches!", "badMessage");
-        return;
+        setMessage(pwnedMessage, "Password has been compromised!", "badMessage");
     } else {
-        setMessage(pwnedMessage, "Password has not been found in any known breaches!", "goodMessage");
+        setMessage(pwnedMessage, "Password has not been compromised!", "goodMessage");
     }
-
-    setMessage(finalMessage, "Password is strong!", "goodMessage");
 }
 
 function checkPasswordLength(password) {
